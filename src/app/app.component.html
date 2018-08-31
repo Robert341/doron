@@ -1,0 +1,91 @@
+<div class="loader" *ngIf="pageLoading">
+  <h3>Page is loading, please wait</h3>
+  <div class="loader-circle"></div>
+</div>
+<div *ngIf="!pageLoading">
+  <div class="page-header">
+    <div class="menu-btn">
+      <img class="menu-btn-icon" src="../assets/img/menu_icon.png" draggable="false" />
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="table-container">
+      <table class="stats-table">
+        <tr class="stats-table-row filter">
+          <td colspan="4">
+            <label>Name, Email or ID
+              <input type="text" class="filter-input" [(ngModel)]="filterForm.nameEmailID" (ngModelChange)="filter()" />
+            </label>
+          </td>
+          <td>
+            <label>Instagram
+              <input type="number" class="filter-input" [(ngModel)]="filterForm.instagram" (ngModelChange)="filter()" />
+            </label>
+          </td>
+          <td>
+            <label>Facebook
+              <input type="number" class="filter-input" [(ngModel)]="filterForm.facebook" (ngModelChange)="filter()" />
+            </label>
+          </td>
+          <td>
+            <label>Twitter
+              <input type="number" class="filter-input" [(ngModel)]="filterForm.twitter" (ngModelChange)="filter()" />
+            </label>
+          </td>
+          <td>
+            <label>Blog
+              <input type="number" class="filter-input" [(ngModel)]="filterForm.blog" (ngModelChange)="filter()" />
+            </label>
+          </td>
+          <td>
+            <label>Youtube
+              <input type="number" class="filter-input" [(ngModel)]="filterForm.youtube" (ngModelChange)="filter()" />
+            </label>
+          </td>
+          <td>
+            <label>Pinterest
+              <input type="number" class="filter-input" [(ngModel)]="filterForm.pinterest" (ngModelChange)="filter()" />
+            </label>
+          </td>
+          <td></td>
+        </tr>
+        <tr class="stats-table-header">
+          <td>
+            <label class="custom-checkbox">
+              <input type="checkbox" (click)="checkAllToggle()" [checked]="allChecked()" [disabled]="dataFiltered.length === 0">
+              <span class="checkmark"></span>
+            </label>
+          </td>
+          <td (click)="sort('ID')"><span>ID</span></td>
+          <td (click)="sort('name')"><span>Name</span></td>
+          <td (click)="sort('email')"><span>Email</span></td>
+          <td (click)="sort('instagram')"><span>Instagram</span></td>
+          <td (click)="sort('facebook')"><span>Facebook</span></td>
+          <td (click)="sort('twitter')"><span>Twitter</span></td>
+          <td (click)="sort('blog')"><span>Blog</span></td>
+          <td (click)="sort('youtube')"><span>Youtube</span></td>
+          <td (click)="sort('pinterest')"><span>Pinterest</span></td>
+          <td (click)="sort('location')"><span>Location</span></td>
+        </tr>
+        <tr class="stats-table-row" *ngFor="let row of dataFiltered">
+          <td>
+            <label class="custom-checkbox">
+              <input type="checkbox" (click)="checkToggle(row.ID)" [checked]="checked.includes(row.ID)">
+              <span class="checkmark"></span>
+            </label>
+          </td>
+          <td>{{row.ID}}</td>
+          <td class="user-data">{{row.name}}</td>
+          <td class="user-data">{{row.email}}</td>
+          <td>{{convertNum(row.instagram)}}</td>
+          <td>{{convertNum(row.facebook)}}</td>
+          <td>{{convertNum(row.twitter)}}</td>
+          <td>{{convertNum(row.blog)}}</td>
+          <td>{{convertNum(row.youtube)}}</td>
+          <td>{{convertNum(row.pinterest)}}</td>
+          <td>{{row.location}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
